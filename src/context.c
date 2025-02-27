@@ -645,6 +645,8 @@ GLFWAPI GLFWwindow* glfwGetCurrentContext(void)
     return _glfwPlatformGetTls(&_glfw.contextSlot);
 }
 
+void glFlush(void);
+
 GLFWAPI void glfwSwapBuffers(GLFWwindow* handle)
 {
     _GLFW_REQUIRE_INIT();
@@ -658,7 +660,7 @@ GLFWAPI void glfwSwapBuffers(GLFWwindow* handle)
                         "Cannot swap buffers of a window that has no OpenGL or OpenGL ES context");
         return;
     }
-
+    glFlush();
     window->context.swapBuffers(window);
 }
 
